@@ -1,0 +1,39 @@
+{
+  "name": "mmcsv-carelink-data",
+  "version": "0.3.0",
+  "description": "Scrape Carelink and Convert stream of mm csv to text",
+  "main": "index.js",
+  "repository": "https://github.com/tidepool-org/mmcsv-carelink-data.git",
+  "author": "Tidepool contributors",
+  "license": "BSD-2",
+  "dependencies": {
+    "common": "0.2.5",
+    "event-stream": "3.1.0",
+    "lodash": "~2.4.1",
+    "moment": "2.5.1",
+    "optimist": "0.6.0",
+    "request": "2.33.0",
+    "sundial": "0.0.1"
+  },
+  "config": {
+    "blanket": {
+      "data-cover-never": [
+        "node"
+      ],
+      "pattern": [
+        "lib/parse"
+      ]
+    },
+    "carelink_security": "https://carelink.minimed.com/patient/j_security_check",
+    "carelink_login": "https://carelink.minimed.com/patient/main/login.do",
+    "carelink_csv": "https://carelink.minimed.com/patient/main/selectCSV.do"
+  },
+  "devDependencies": {
+    "mocha": "1.17.1",
+    "should": "3.1.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "travis-cov": "~0.2.4",
+    "coveralls": "~2.6.1",
+    "blanket": "~1.1.6"
+  }
+}
