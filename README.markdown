@@ -15,7 +15,9 @@ usage: /home/bewest/src/tidepool/mmcsv/lib/fetch.js <user> <password> <days>
 
 ### Install
 ```bash
-$ npm install mmcsv
+$ git clone git://github.com/tidepool-org/mmcsv-carelink-data.git mmcsv
+$ cd mmcsv
+$ npm install
 ```
 [![Build Status](https://travis-ci.org/tidepool-org/mmcsv-carelink-data.png?branch=master)](https://travis-ci.org/tidepool-org/mmcsv-carelink-data)
 [![Code Climate](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data.png)](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data)
