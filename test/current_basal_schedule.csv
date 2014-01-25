@@ -1,0 +1,13 @@
+Index,Date,Time,Timestamp,New Device Time,BG Reading (mg/dL),Linked BG Meter ID,Temp Basal Amount (U/h),Temp Basal Type,Temp Basal Duration (hh:mm:ss),Bolus Type,Bolus Volume Selected (U),Bolus Volume Delivered (U),Programmed Bolus Duration (hh:mm:ss),Prime Type,Prime Volume Delivered (U),Suspend,Rewind,BWZ Estimate (U),BWZ Target High BG (mg/dL),BWZ Target Low BG (mg/dL),BWZ Carb Ratio (grams),BWZ Insulin Sensitivity (mg/dL),BWZ Carb Input (grams),BWZ BG Input (mg/dL),BWZ Correction Estimate (U),BWZ Food Estimate (U),BWZ Active Insulin (U),Alarm,Sensor Calibration BG (mg/dL),Sensor Glucose (mg/dL),ISIG Value,Daily Insulin Total (U),Raw-Type,Raw-Values,Raw-ID,Raw-Upload ID,Raw-Seq Num,Raw-Device Type
+1269,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentTempBasal,"RATE=0.45, DURATION=0",11345547465,52554074,6,Paradigm 522
+1270,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentMaxBasal,RATE=2,11345547466,52554074,7,Paradigm 522
+1272,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentActiveBasalProfilePattern,PATTERN_NAME=standard,11345547468,52554074,9,Paradigm 522
+1273,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfilePattern,"PATTERN_NAME=standard, NUM_PROFILES=4",11345547469,52554074,10,Paradigm 522
+1274,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfile,"PATTERN_DATUM=11345547469, PROFILE_INDEX=0, RATE=0.8, START_TIME=0",11345547470,52554074,11,Paradigm 522
+1275,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfile,"PATTERN_DATUM=11345547469, PROFILE_INDEX=1, RATE=0.95, START_TIME=23400000",11345547471,52554074,12,Paradigm 522
+1276,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfile,"PATTERN_DATUM=11345547469, PROFILE_INDEX=2, RATE=1.1, START_TIME=34200000",11345547472,52554074,13,Paradigm 522
+1277,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfile,"PATTERN_DATUM=11345547469, PROFILE_INDEX=3, RATE=0.95, START_TIME=50400000",11345547473,52554074,14,Paradigm 522
+1278,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfilePattern,"PATTERN_NAME=pattern a, NUM_PROFILES=0",11345547474,52554074,15,Paradigm 522
+1279,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentBasalProfilePattern,"PATTERN_NAME=pattern b, NUM_PROFILES=0",11345547475,52554074,16,Paradigm 522
+1280,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentVariableBasalProfilePatternEnable,ENABLE=true,11345547476,52554074,17,Paradigm 522
+1292,9/5/13,16:37:23,9/5/13 16:37:23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,CurrentTempBasalType,TEMP_BASAL_TYPE=insulin_units,11345547488,52554074,29,Paradigm 522
