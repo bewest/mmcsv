@@ -71,7 +71,7 @@ describe("parse", function() {
         es = require('event-stream');
         readings = [];
 
-        toProcess = es.readArray(['1,12/20/12,12:18:54,12/20/12 04:18:45,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
+        toProcess = es.readArray(['1,12/20/12,04:18:45,12/20/12 04:18:45,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
         
         var stream = toProcess.pipe(Parse.smbg(TIME_ZONE));
 
@@ -83,8 +83,7 @@ describe("parse", function() {
               if (data) { readings.push(data); }
 
               var convertedUTC = readings[0].time;
-
-              convertedUTC.should.equal('2012-12-20T02:18:45+00:00');
+              convertedUTC.should.equal('2012-12-20T04:18:45');
 
               done( );
           });
