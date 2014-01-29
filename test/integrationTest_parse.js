@@ -18,7 +18,7 @@ describe("parse", function() {
         var Parse = require('../lib/parse');
         var es = require('event-stream');
 
-        var stream = es.pipeline(input, Parse.smbg(TIME_ZONE)
+        var stream = es.pipeline(input, Parse.smbg( )
           , es.writeArray( function (err, readings) {
               should.not.exist(err);
               readings.length.should.equal(14);
@@ -48,7 +48,7 @@ describe("parse", function() {
 
         var toProcess = es.readArray(['1,10/1/13,02:30:00,10/1/13 02:30:00,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
         
-        var stream = Parse.smbg(TIME_ZONE);
+        var stream = Parse.smbg( );
 
         es.pipeline(toProcess, stream, es.writeArray(function finish (err, readings) {
           readings.length.should.equal(1);
@@ -61,7 +61,7 @@ describe("parse", function() {
 
         var toProcess = es.readArray(['1,12/20/12,04:18:45,12/20/12 04:18:45,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
         
-        var stream = toProcess.pipe(Parse.smbg(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.smbg( ));
         es.pipeline(stream, es.writeArray(function finish (err, readings) {
           var time = readings[0].time;
           time.should.equal('2012-12-20T04:18:45');
@@ -73,7 +73,7 @@ describe("parse", function() {
 
         var toProcess = es.readArray(['70,10/4/13,18:43:58,10/4/13 18:43:58,,102,#C27532,,,,,,,,,,,,,,,,,,,,,,,,,,,BGReceived,"AMOUNT=102, ACTION_REQUESTOR=paradigm link or b key, PARADIGM_LINK_ID=C27532",11521576171,52626644,180,Paradigm Revel - 723']);
         
-        var stream = toProcess.pipe(Parse.smbg(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.smbg( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
           readings.length.should.equal(1);
           done( );
@@ -83,7 +83,7 @@ describe("parse", function() {
       it('CalBGForPH is a recognised as a smbg', function(done) {
 
         var toProcess = es.readArray(['21,10/3/13,20:36:38,10/3/13 20:36:38,,,,,,,,,,,,,,,,,,,,,,,,,,83,,,,CalBGForPH,"AMOUNT=83, ACTION_REQUESTOR=pump",11521576215,52626644,224,Paradigm Revel - 723']);
-        var stream = toProcess.pipe(Parse.smbg(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.smbg( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
           readings.length.should.equal(1);
           done( );
@@ -97,7 +97,7 @@ describe("parse", function() {
       it('should emit 14 carb records', function(done) {
 
         var toProcess = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
-        var stream = toProcess.pipe(Parse.carbs(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.carbs( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
           readings.length.should.equal(14);
           done( );
@@ -111,7 +111,7 @@ describe("parse", function() {
 
       it('should emit 16 bolus records', function(done) {
         var toProcess = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
-        var stream = toProcess.pipe(Parse.bolus(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.bolus( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
           readings.length.should.equal(16);
           done( );
@@ -125,7 +125,7 @@ describe("parse", function() {
 
       it('should emit 9 basal records', function(done) {
         var toProcess = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
-        var stream = toProcess.pipe(Parse.basal(TIME_ZONE));
+        var stream = toProcess.pipe(Parse.basal( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
           readings.length.should.equal(9);
           done( );
