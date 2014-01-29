@@ -8,8 +8,8 @@ if (!module.parent) {
   var mmcsv = require('./lib/parse');
   es.pipeline(
     process.openStdin( )
-  , mmcsv.all(new Date( ).getTimezoneOffset( ))
-  , es.writeArray(function (err, data) {
+  , mmcsv.all( )
+  , es.writeArray(function done (err, data) {
       console.log(data);
       console.log("Found", data.length, 'records.');
     })
