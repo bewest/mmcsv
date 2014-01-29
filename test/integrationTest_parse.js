@@ -41,28 +41,24 @@ describe("parse", function() {
     });
     //BGBayer
     describe("smbg type tests", function() {
-      it('BGBayer should be recognised as a smbg and emit', function(done) {
+      it('BGBayer should in the smbg stream', function(done) {
 
         var Parse, es, Stream, bgTypeStream, toProcess, readings;
 
         Parse = require('../lib/parse');
         es = require('event-stream');
-        readings = [];
 
         toProcess = es.readArray(['1,10/1/13,02:30:00,10/1/13 02:30:00,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
         
-        var stream = toProcess.pipe(Parse.smbg(TIME_ZONE));
+        var stream = Parse.smbg(TIME_ZONE);
 
-        stream
-          .on( 'data', function(data) {
-              readings.push(data);
-            })
-          .on( 'end',  function(data) {
-              if (data) { readings.push(data); }
-              readings.length.should.equal(1);
-              done( );
-          });
+        es.pipeline(toProcess, stream,  es.writeArray(function finish (err, readings) {
+          readings.length.should.equal(1);
+          done( );
+        }));
+
       });
+
       it('should show year 2012, month Dec and day 20 for given raw time of 12/20/12 04:18:45', function(done) {
 
         var Parse, es, Stream, bgTypeStream, toProcess, readings;
@@ -82,8 +78,8 @@ describe("parse", function() {
           .on( 'end',  function(data) {
               if (data) { readings.push(data); }
 
-              var convertedUTC = readings[0].time;
-              convertedUTC.should.equal('2012-12-20T04:18:45');
+              var time = readings[0].time;
+              time.should.equal('2012-12-20T04:18:45');
 
               done( );
           });
