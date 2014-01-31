@@ -39,8 +39,7 @@ $ curl localhost:4545/status
 # Fetch
 
 ```js
-var userTimeZone = 120;
-var require('mmcsv').fetch('carelink username', 'carelink password', userTimeZone ,14, function(err, data) {});
+var require('mmcsv').fetch('carelink username', 'carelink password', 14, function(err, data) {});
 ```
 
 # Parser
@@ -53,9 +52,8 @@ var fs = require('fs'),
  mmcsv = require('../');
 
 var stream = fs.createReadStream('examples/upload_for_stream_tests.csv');
-var timeZone = 120;//for example
 
-es.pipeline(stream, mmcsv.all(timeZone) , es.writeArray(
+es.pipeline(stream, mmcsv.all( ) , es.writeArray(
   function (err, readings) {
     console.log('Done parsing', readings);
 
@@ -75,11 +73,10 @@ es.pipeline(stream, mmcsv.all(timeZone) , es.writeArray(
 if (!module.parent) {
   // console.log('run as main');
   var es = require('event-stream');
-  var timeZone = -760;//for example
 
   es.pipeline(
       process.openStdin( )
-    , mmcsv.all(timeZone)
+    , mmcsv.all( )
     , es.stringify( )
     , process.stdout
   );
