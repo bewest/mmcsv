@@ -21,6 +21,10 @@ $ npm install
 ```
 [![Build Status](https://travis-ci.org/tidepool-org/mmcsv-carelink-data.png?branch=master)](https://travis-ci.org/tidepool-org/mmcsv-carelink-data)
 [![Code Climate](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data.png)](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data)
+[![Coverage Status](https://coveralls.io/repos/tidepool-org/mmcsv-carelink-data/badge.png)](https://coveralls.io/r/tidepool-org/mmcsv-carelink-data)
+
+
+
 ### Test
 ```bash
 $ make test
