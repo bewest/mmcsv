@@ -15,6 +15,19 @@
     "request": "2.33.0",
     "sundial": "0.0.1"
   },
+  "testling": {
+    "harness": "mocha",
+    "browsers": [
+      "ie/9..latest",
+      "chrome/20..latest",
+      "firefox/14..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6",
+      "ipad/6"
+    ],
+    "files": "test/simpleTest.js"
+  },
   "config": {
     "blanket": {
       "data-cover-never": [
