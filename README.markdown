@@ -23,6 +23,7 @@ $ npm install
 [![Code Climate](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data.png)](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data)
 [![Coverage Status](https://coveralls.io/repos/tidepool-org/mmcsv-carelink-data/badge.png)](https://coveralls.io/r/tidepool-org/mmcsv-carelink-data)
 
+[![browser support](https://ci.testling.com/tidepool-org/mmcsv-carelink-data.png)](https://ci.testling.com/tidepool-org/mmcsv-carelink-data)
 
 
 ### Test
