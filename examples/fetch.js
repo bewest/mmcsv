@@ -8,7 +8,7 @@ if (!module.parent) {
     , pure = process.env['MMCSV_PARSE'] ? null : true;
     ;
   if (user && pass && days) {
-    var out = pure ? process.stdout : null;
+    var out = pure ? es.pipeline(es.through( ), process.stdout) : null;
     console.log('#', process.argv[1], user, pass, days);
     fetch(user, pass, days, function(err, data) {
       if (!err) {

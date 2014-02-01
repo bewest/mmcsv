@@ -34,7 +34,8 @@
         "node"
       ],
       "pattern": [
-        "lib/parse"
+        "lib/parse",
+        "lib/util"
       ]
     },
     "carelink_security": "https://carelink.minimed.com/patient/j_security_check",
