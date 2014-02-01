@@ -9,7 +9,7 @@ if (!module.parent) {
     ;
   if (user && pass && days) {
     var out = pure ? es.pipeline(es.through( ), process.stdout) : null;
-    console.log('#', process.argv[1], user, pass, days);
+    console.log('#', process.argv[1], user, days);
     fetch(user, pass, days, function(err, data) {
       if (!err) {
         console.log("data:", data);
