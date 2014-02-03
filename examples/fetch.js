@@ -25,7 +25,6 @@ if (!module.parent) {
 
     if (out) { out.resume( ); out.pipe(process.stdout); }
 
-
   } else {
     console.log('usage:', process.argv[1], '<user> <password> <days>');
   }
