@@ -5,12 +5,17 @@ Scraper and Parser for Medtronic pump, cgb and connected bg meter data.
 
 # Usage
 ```bash
-$ cat examples/*.csv | node index.js
+# prints json results
+$ cat examples/*.csv | node examples/cli.js
 ```
 
 ```bash
-$ node lib/fetch.js
-usage: /home/bewest/src/tidepool/mmcsv/lib/fetch.js <user> <password> <days>
+# for raw csv:
+$ node examples/fetch.js <user> <password> 120
+usage: /home/bewest/src/tidepool/mmcsv/examples/fetch.js <user> <password> <days>
+
+# for parsed results in json:
+$ MMCSV_PARSE=true node examples/fetch.js <user> <password> 120
 ```
 
 ### Install
@@ -23,7 +28,7 @@ $ npm install
 [![Code Climate](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data.png)](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data)
 [![Coverage Status](https://coveralls.io/repos/tidepool-org/mmcsv-carelink-data/badge.png)](https://coveralls.io/r/tidepool-org/mmcsv-carelink-data)
 
-[![browser support](https://ci.testling.com/tidepool-org/mmcsv-carelink-data.png?bust=githubcache)](https://ci.testling.com/tidepool-org/mmcsv-carelink-data)
+[![browser support](https://ci.testling.com/tidepool-org/mmcsv-carelink-data.png)](https://ci.testling.com/tidepool-org/mmcsv-carelink-data)
 
 
 ### Test

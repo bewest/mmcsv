@@ -8,10 +8,14 @@ if (!module.parent) {
     , pure = process.env['MMCSV_PARSE'] ? null : true;
     ;
   if (user && pass && days) {
-    var out = pure ? process.stdout : null;
-    console.log('#', process.argv[1], user, pass, days);
+    var out = pure ? es.through( ) : null;
+    out.pause( );
+    console.log('#', process.argv[1], user, days);
     fetch(user, pass, days, function(err, data) {
       if (!err) {
+        if (out) {
+          return;
+        }
         console.log("data:", data);
         console.log("data.length:", data.length);
       } else {
@@ -19,6 +23,7 @@ if (!module.parent) {
       }
     }, out);
 
+    if (out) { out.resume( ); out.pipe(process.stdout); }
 
   } else {
     console.log('usage:', process.argv[1], '<user> <password> <days>');
