@@ -11,8 +11,10 @@
     "event-stream": "3.1.0",
     "lodash": "~2.4.1",
     "moment": "~2.5.1",
-    "optimist": "0.6.0",
-    "request": "2.33.0"
+    "optimist": "~0.6.0",
+    "request": "2.33.0",
+    "tabtab": "git://github.com/bewest/node-tabtab.git",
+    "yargs": "~1.0.15"
   },
   "testling": {
     "harness": "mocha",
@@ -47,6 +49,7 @@
     "mocha-lcov-reporter": "0.0.1",
     "travis-cov": "~0.2.4",
     "coveralls": "~2.6.1",
-    "blanket": "~1.1.6"
+    "blanket": "~1.1.6",
+    "tidepool-data-model": "0.0.1"
   }
 }

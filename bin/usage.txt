@@ -1,0 +1,18 @@
+Usage: $0 <command> [opts]
+
+## Commands
+Command is one of:
+
+  fetch              Fetch csv from carelink.
+  parse              Parse Carelink csv.
+  version            Print version of this module.
+
+### Fetch
+
+Usage: $0 fetch <opts> [./path/to.csv|stdout]
+  Fetch raw csv from carelink
+  $0 fetch
+     --username=, -u    Carelink username
+
+     --password=, -p    Carelink password
+
