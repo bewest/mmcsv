@@ -34,7 +34,7 @@ describe("parse", function() {
       
       var stream = toProcess.pipe(Parse( ).all( ));
       es.pipeline(stream, es.writeArray(function finish (err, readings) {
-        var time = readings[0].time;
+        var time = readings[0].deviceTime;
         time.should.equal('2012-12-20T04:18:45');
         done( );
       }));
