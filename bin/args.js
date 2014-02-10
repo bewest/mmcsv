@@ -31,6 +31,7 @@ function parse (args) {
     default:
       break;
   }
+  opts.main = sub;
   /*
   if (!opts.command || opts.command == 'help') {
     config.showHelp( );
