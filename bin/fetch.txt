@@ -1,0 +1,8 @@
+### Fetch
+Fetch raw csv from carelink
+
+Usage: $0 fetch <opts> [./path/to.csv|stdout]
+  $0 fetch
+     --username=, -u    Carelink username
+     --password=, -p    Carelink password
+     --json, -j         Output json, not csv

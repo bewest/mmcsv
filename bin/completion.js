@@ -36,8 +36,8 @@ module.exports = completer;
 function parse (o) {
   if (o) {
     var opts = args(o.line.split(' '));
-    return tabtab.log(['type=all', 'type=smbg', 'type=carbs',
-                'type=basal', 'type=cbg', 'type=bolus'], o, '--');
+    return tabtab.log(['filter=all', 'filter=smbg', 'filter=carbs',
+                'filter=basal', 'filter=cbg', 'filter=bolus'], o, '--');
   }
 }
 

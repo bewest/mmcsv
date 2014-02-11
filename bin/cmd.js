@@ -14,7 +14,7 @@ if (!module.parent) {
   if (process.argv[2] == 'completion') {
     return completer(opts);
   }
-  if (opts.command) {
+  if (opts.command && !opts.h) {
     main(opts);
   } else {
     console.log(opts.help( ));
