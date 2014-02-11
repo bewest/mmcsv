@@ -30,7 +30,7 @@
       "iphone/6",
       "ipad/6"
     ],
-    "files": "test/simpleTest.js"
+    "files": [ "test/simpleTest.js", "test/test_validation.js" ]
   },
   "config": {
     "blanket": {

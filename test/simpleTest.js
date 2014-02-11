@@ -1,10 +1,10 @@
 var should = require('should');
 var _ = require('lodash');
 var moment = require('moment');
+var Parse = require('../lib/parse');
 
 describe("parse", function() {
 	it('should exist cand be callable', function(done) {
-    var Parse = require('../lib/parse');
     should.exist(Parse);
     should.exist(Parse.call);
     done();
