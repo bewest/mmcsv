@@ -23,7 +23,6 @@ function completer ( ) {
         parse(o);
         break;
     }
-    // console.error(o.last);
   });
   if (tabtab.isComplete( )) {
 

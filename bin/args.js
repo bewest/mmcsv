@@ -31,33 +31,6 @@ function parse (args) {
 
   opts.command = opts._.shift( );
 
-  /*
-  var sub = false;
-  switch (opts.command) {
-    case 'fetch':
-      // sub = require('./fetch').opts;
-      content = fs.readFileSync(__dirname + '/fetch.txt').toString( );
-      // config.usage(content);
-      opts = extend(opts, optimist(opts._).usage(content).argv);
-      break;
-    case 'parse':
-      // sub = require('./parse').opts;
-      break;
-    default:
-      break;
-  }
-  if (sub) {
-    // sub.parse
-    
-  }
-  opts.main = sub;
-  */
-  /*
-  if (!opts.command || opts.command == 'help') {
-    config.showHelp( );
-    process.exit(0);
-  }
-  */
   return opts;
 }
 
