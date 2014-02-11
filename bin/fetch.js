@@ -4,14 +4,15 @@ function fetch (opts) {
   var out = es.through( );
   if (!opts.username || !opts.password || !opts.days) {
     if (!opts.username) {
-      console.error('Set --username');
+      console.error('Missing --username');
     }
     if (!opts.password) {
-      console.error('Set --password');
+      console.error('Missing --password');
     }
     if (isNaN(opts.days)) {
       console.error('Set --days to the number of days to fetch');
     }
+    console.error(opts.help( ));
     process.exit(1);
   }
   if (opts.json) {

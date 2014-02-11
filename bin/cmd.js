@@ -13,6 +13,7 @@ if (!module.parent) {
   if (process.argv[2] == 'completion') {
     return completer(opts);
   }
+  if (opts.command == 'help') opts.h = true;
   if (opts.command && !opts.h) {
     main(opts);
   } else {

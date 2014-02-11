@@ -16,6 +16,9 @@
     "tabtab": "git://github.com/bewest/node-tabtab.git",
     "yargs": "~1.0.15"
   },
+  "bin": {
+    "mmcsv": "bin/cmd.js"
+  },
   "testling": {
     "harness": "mocha",
     "browsers": [
