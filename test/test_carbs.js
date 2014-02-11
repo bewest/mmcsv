@@ -15,26 +15,30 @@ var fixture = {
   }
 };
 
-var fixtures = [ fixture ];
-describe('carbs', function ( ) {
-  beforeEach(function ( ) {
-    var mmcsv = require('../lib/parse');
-    this.fixture = fixture;
-    this.parser = mmcsv[this.fixture.parser]( );
-    this.validate = validators({schema: this.fixture.schema});
-  });
-  it('stream', function (done) {
-    var prove = this.fixture.proof;
-    es.pipeline(es.readArray([this.fixture.input])
-      , this.parser, validators.stream(this.validate)
-      , es.writeArray(proof))
-      ;
-    function proof (err, results) {
-      prove(err, results);
-      done( );
-    }
-    
-  });
+var fixtures = [ fixture ].concat(require('./fixtures'));
+fixtures.forEach(testFixture);
+function testFixture (fixture) {
+  var desc = 'mmcsv.parse.' + fixture.name;
+  describe(desc, function ( ) {
+    beforeEach(function ( ) {
+      var mmcsv = require('../lib/parse');
+      this.fixture = fixture;
+      this.parser = mmcsv[this.fixture.parser]( );
+      this.validate = validators({schema: this.fixture.schema});
+    });
+    it('stream', function (done) {
+      var prove = this.fixture.proof;
+      es.pipeline(es.readArray([this.fixture.input])
+        , this.parser, validators.stream(this.validate)
+        , es.writeArray(proof))
+        ;
+      function proof (err, results) {
+        prove(err, results);
+        done( );
+      }
+      
+    });
 
-});
+  });
+}
 
