@@ -23,6 +23,8 @@ function completer ( ) {
         parse(o);
         break;
     }
+    if (/--\w?/g.test(o.last)) return tabtab.log(parsed.longs, o, '--');
+    if (/^-\w?/.test(o.last)) return tabtab.log(parsed.shorts, o, '-');
   });
   if (tabtab.isComplete( )) {
 
@@ -50,7 +52,7 @@ function fetch ( ) {
       if (opts.username && !opts.password) {
         tabtab.log(['password'], o, '--');
       }
-      if (/--?\w?/g.test(o.last)) return tabtab.log(parsed.longs, o, '--');
+      if (/--\w?/g.test(o.last)) return tabtab.log(parsed.longs, o, '--');
       if (/^-\w?/.test(o.last)) return tabtab.log(parsed.shorts, o, '-');
     }
   });

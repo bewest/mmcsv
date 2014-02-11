@@ -13,12 +13,13 @@ function parse (args) {
     }
   };
   var command = args.slice(0, 1).shift( );
-  // var main = args.shift( );
   switch (command) {
     case 'fetch':
       content = fs.readFileSync(__dirname + '/fetch.txt').toString( );
+      break;
     case 'parse':
       content = fs.readFileSync(__dirname + '/parse.txt').toString( );
+      break;
     default:
       break;
   }
@@ -30,6 +31,10 @@ function parse (args) {
   opts.help = config.help;
 
   opts.command = opts._.shift( );
+  if (command == 'fetch') {
+    opts.username = opts.username || process.env['CARELINK_USERNAME'];
+    opts.password = opts.password || process.env['CARELINK_PASSWORD'];
+  }
 
   return opts;
 }
