@@ -98,8 +98,11 @@ $ curl localhost:4545/status
 
 ```js
 var es  = require('event-stream');
+// provide credentials and number of days to fetch
 var opts = { username: 'my-username', password: 'my-password', days: 120 };
+// configure parser readable stream
 var stream = require('mmcsv').fetch(opts);
+// pipe to destination
 es.pipeline(stream, es.stringify( )).pipe(process.stdout);
 ```
 
@@ -112,8 +115,10 @@ var fs = require('fs'),
      _ = require('underscore'),
  mmcsv = require('../');
 
+// configure incoming csv, from a file for example
 var stream = fs.createReadStream('examples/upload_for_stream_tests.csv');
 
+// create through stream which parses incoming carelink csv into json
 es.pipeline(stream, mmcsv.all( ) , es.writeArray(
   function (err, readings) {
     console.log('Done parsing', readings);
