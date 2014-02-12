@@ -39,7 +39,10 @@ describe('generate schedule', function ( ) {
           value: '1',
           start: '2014-02-12T00:00:00' } ]
       ;
-      JSON.stringify(results).should.equal(JSON.stringify(correct));
+      results.should.containEql(correct[0]);
+      results.should.containEql(correct[1]);
+      results.should.containEql(correct[2]);
+      results.should.containEql(correct[3]);
       done( );
     }
   });
@@ -64,7 +67,8 @@ describe('generate schedule', function ( ) {
           value: '2',
           start: '2014-02-11T06:30:00' } ]
       ;
-      JSON.stringify(results).should.equal(JSON.stringify(correct));
+      results.should.containEql(correct[0]);
+      results.should.containEql(correct[1]);
       done( );
     }
   });
