@@ -13,31 +13,31 @@ describe('generate schedule', function ( ) {
       var correct = [ { microseconds: '0',
           rate: '1',
           type: 'basal',
-          time: '2014-02-09T00:00:00-08:00',
+          time: '2014-02-09T00:00:00',
           basal: '1',
           value: '1',
-          start: '2014-02-09T00:00:00-08:00' },
+          start: '2014-02-09T00:00:00' },
         { microseconds: '0',
           rate: '1',
           type: 'basal',
-          time: '2014-02-10T00:00:00-08:00',
+          time: '2014-02-10T00:00:00',
           basal: '1',
           value: '1',
-          start: '2014-02-10T00:00:00-08:00' },
+          start: '2014-02-10T00:00:00' },
         { microseconds: '0',
           rate: '1',
           type: 'basal',
-          time: '2014-02-11T00:00:00-08:00',
+          time: '2014-02-11T00:00:00',
           basal: '1',
           value: '1',
-          start: '2014-02-11T00:00:00-08:00' },
+          start: '2014-02-11T00:00:00' },
         { microseconds: '0',
           rate: '1',
           type: 'basal',
-          time: '2014-02-12T00:00:00-08:00',
+          time: '2014-02-12T00:00:00',
           basal: '1',
           value: '1',
-          start: '2014-02-12T00:00:00-08:00' } ]
+          start: '2014-02-12T00:00:00' } ]
       ;
       JSON.stringify(results).should.equal(JSON.stringify(correct));
       done( );
@@ -52,17 +52,17 @@ describe('generate schedule', function ( ) {
       var correct = [ { microseconds: '0',
           rate: '1',
           type: 'basal',
-          time: '2014-02-11T00:00:00-08:00',
+          time: '2014-02-11T00:00:00',
           basal: '1',
           value: '1',
-          start: '2014-02-11T00:00:00-08:00' },
+          start: '2014-02-11T00:00:00' },
         { microseconds: '23400000',
           rate: '2',
           type: 'basal',
-          time: '2014-02-11T06:30:00-08:00',
+          time: '2014-02-11T06:30:00',
           basal: '2',
           value: '2',
-          start: '2014-02-11T06:30:00-08:00' } ]
+          start: '2014-02-11T06:30:00' } ]
       ;
       JSON.stringify(results).should.equal(JSON.stringify(correct));
       done( );
