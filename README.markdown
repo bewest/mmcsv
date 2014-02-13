@@ -3,22 +3,8 @@ mmcsv
 
 Scraper and Parser for Medtronic pump, cgb and connected bg meter data.
 
-# Usage
-```bash
-# prints json results
-$ cat examples/*.csv | node examples/cli.js
-```
-
-```bash
-# for raw csv:
-$ node examples/fetch.js <user> <password> 120
-usage: /home/bewest/src/tidepool/mmcsv/examples/fetch.js <user> <password> <days>
-
-# for parsed results in json:
-$ MMCSV_PARSE=true node examples/fetch.js <user> <password> 120
-```
-
-### Install
+## Install
+From source
 ```bash
 $ git clone git://github.com/tidepool-org/mmcsv-carelink-data.git mmcsv
 $ cd mmcsv
@@ -36,6 +22,68 @@ $ npm install
 $ make test
 ```
 
+## Usage
+```bash
+$ mmcsv -h
+Usage: mmcsv <command> [opts]
+
+## Commands
+Command is one of:
+
+  fetch              Fetch csv from carelink.
+  parse              Parse Carelink csv.
+  version            Print version of this module.
+
+  --help, -h         This help.
+
+
+Options:
+  --help, -h  Some more details about mmcsv
+```
+
+```bash
+# set up tab completion:
+$ . <(mmcsv completion)
+```
+
+```bash
+$ mmcsv parse -h
+### Parse
+Parse Carelink CSV into JSON.
+
+Usage: mmcsv parse <opts> [./path/to.csv|stdin]
+Parser options:
+
+     --filter=all,   -f all
+     --filter=smbg,  -f smbg
+     --filter=cbg,   -f cbg
+     --filter=basal, -f basal
+     --filter=bolus, -f bolus
+     --filter=carbs, -f carbs
+
+
+Options:
+  --help, -h  Some more details about mmcsv
+
+```
+
+```bash
+### Fetch
+Fetch raw csv from carelink
+
+Usage: mmcsv fetch <opts> [./path/to.csv|stdout]
+Options:
+  --username=, -u    Carelink username
+  --password=, -p    Carelink password
+  --days, -d         Number of days to fetch
+  --json, -j         Output json, not csv
+
+
+Options:
+  --help, -h  Some more details about mmcsv
+
+```
+
 ### Server
 ```bash
 # random port if not set
@@ -49,7 +97,13 @@ $ curl localhost:4545/status
 # Fetch
 
 ```js
-var require('mmcsv').fetch('carelink username', 'carelink password', 14, function(err, data) {});
+var es  = require('event-stream');
+// provide credentials and number of days to fetch
+var opts = { username: 'my-username', password: 'my-password', days: 120 };
+// configure parser readable stream
+var stream = require('mmcsv').fetch(opts);
+// pipe to destination
+es.pipeline(stream, es.stringify( )).pipe(process.stdout);
 ```
 
 # Parser
@@ -61,8 +115,10 @@ var fs = require('fs'),
      _ = require('underscore'),
  mmcsv = require('../');
 
+// configure incoming csv, from a file for example
 var stream = fs.createReadStream('examples/upload_for_stream_tests.csv');
 
+// create through stream which parses incoming carelink csv into json
 es.pipeline(stream, mmcsv.all( ) , es.writeArray(
   function (err, readings) {
     console.log('Done parsing', readings);

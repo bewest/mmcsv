@@ -1,0 +1,12 @@
+### Parse
+Parse Carelink CSV into JSON.
+
+Usage: $0 parse <opts> [./path/to.csv|stdin]
+Parser options:
+
+     --filter=all,   -f all
+     --filter=smbg,  -f smbg
+     --filter=cbg,   -f cbg
+     --filter=basal, -f basal
+     --filter=bolus, -f bolus
+     --filter=carbs, -f carbs

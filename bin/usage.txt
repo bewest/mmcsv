@@ -1,0 +1,10 @@
+Usage: $0 <command> [opts]
+
+## Commands
+Command is one of:
+
+  fetch              Fetch csv from carelink.
+  parse              Parse Carelink csv.
+  version            Print version of this module.
+
+  --help, -h         This help.
