@@ -27,7 +27,8 @@ function testFixture (fixture) {
       this.validate = validators({schema: this.fixture.schema});
     });
 
-    it('stream should emit valid elements', function (done) {
+    var specifically = fixture.description || 'stream should emit valid elements';
+    it(specifically, function (done) {
       var prove = this.fixture.proof;
       es.pipeline(es.readArray([this.fixture.input])
         , this.parser, validators.stream(this.validate)
