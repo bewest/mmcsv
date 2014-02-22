@@ -42,8 +42,9 @@
         "node"
       ],
       "pattern": [
-        "lib/parse",
+        "lib/desalinate",
         "lib/generate",
+        "lib/parse",
         "lib/util"
       ]
     },
