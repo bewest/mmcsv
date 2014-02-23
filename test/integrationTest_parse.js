@@ -42,12 +42,12 @@ describe("parse", function() {
     describe("carb integration tests", function() {
       var es = require('event-stream');
       var Parse = require('../lib/parse');
-      it('should emit 14 carb records', function(done) {
+      it('should emit 16 carb records', function(done) {
 
         var toProcess = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
         var stream = toProcess.pipe(Parse.carbs( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
-          readings.length.should.equal(14);
+          readings.length.should.equal(16);
           done( );
         }));
       });

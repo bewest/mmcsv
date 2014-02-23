@@ -8,6 +8,7 @@ var fixture = {
   // '2771,1/25/14,23:37:34,1/25/14 23:37:34,,,,,,,Dual/Square,2.3,1.7,01:00:00,,,,,,,,,,,,,,,,,,,,BolusSquare,"AMOUNT=1.7, CONCENTRATION=null, PROGRAMMED_AMOUNT=2.3, ACTION_REQUESTOR=pump, DURATION=3600000, IS_DUAL_COMPONENT=true, UNABSORBED_INSULIN_TOTAL=null",12354037660,52963854,419,Paradigm 522'
 , proof: function proof (err, results) {
     var result = results.pop( );
+    // console.log(result);
     // result.errors.should.be.empty;
   }
 };
