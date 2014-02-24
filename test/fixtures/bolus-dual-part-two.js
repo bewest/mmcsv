@@ -10,8 +10,17 @@ var fixture = {
     var result = results.pop( );
     var inst = result.instance;
     inst.should.be.ok;
+    var correct = {
+      value: '1.7',
+      bolus: 1.7,
+      programmed: 2.3,
+      type: 'bolus-dual/square',
+      deviceTime: '2014-01-25T23:37:34',
+      duration: '3600000'
+    };
+    inst.should.eql(correct);
     // inst.value.should.equal('1.7');
-    // inst.bolus.should.equal('2.3');
+    // inst.programmed.should.equal(2.3);
     // inst.duration.should.equal('3600000');
     inst.type.should.equal('bolus-dual/square');
     // console.log(result);
