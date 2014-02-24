@@ -15,7 +15,7 @@ var fixture = {
       deviceTime: '2013-10-05T20:17:54'
     };
     inst.should.eql(correct);
-    // result.errors.should.be.empty;
+    result.errors.should.be.empty;
   }
 };
 module.exports = fixture;
