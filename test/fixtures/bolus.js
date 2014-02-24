@@ -11,6 +11,7 @@ var fixture = {
       value: '5.4',
       bolus: 5.4,
       programmed: 5.4,
+      joinKey: 'AABBCCDD 124 Paradigm Revel - 523',
       type: 'bolus',
       subType: 'normal',
       deviceTime: '2013-10-05T20:17:54'
