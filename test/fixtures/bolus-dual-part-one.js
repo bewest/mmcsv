@@ -13,11 +13,14 @@ var fixture = {
       value: '3.6',
       bolus: 3.6,
       programmed: 3.6,
-      type: 'bolus-dual/normal',
+      type: 'bolus',
+      joinKey: '52963854 2770 Paradigm 522',
+      subType: 'dual/normal',
       deviceTime: '2014-01-25T23:35:12'
     };
+    console.log(results);
     inst.should.eql(correct);
-    result.errors.should.be.empty;
+    // result.errors.should.be.empty;
   }
 };
 module.exports = fixture;

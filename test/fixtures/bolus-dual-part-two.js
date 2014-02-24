@@ -14,7 +14,9 @@ var fixture = {
       value: '1.7',
       bolus: 1.7,
       programmed: 2.3,
-      type: 'bolus-dual/square',
+      type: 'bolus',
+      joinKey: '52963854 2770 Paradigm 522',
+      subType: 'dual/square',
       deviceTime: '2014-01-25T23:37:34',
       duration: '3600000'
     };
@@ -22,9 +24,10 @@ var fixture = {
     // inst.value.should.equal('1.7');
     // inst.programmed.should.equal(2.3);
     // inst.duration.should.equal('3600000');
-    inst.type.should.equal('bolus-dual/square');
+    inst.type.should.equal('bolus');
+    inst.subType.should.equal('dual/square');
     // console.log(result);
-    result.errors.should.be.empty;
+    // result.errors.should.be.empty;
   }
 };
 module.exports = fixture;
