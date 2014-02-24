@@ -18,7 +18,6 @@ var fixture = {
       subType: 'dual/normal',
       deviceTime: '2014-01-25T23:35:12'
     };
-    console.log(results);
     inst.should.eql(correct);
     // result.errors.should.be.empty;
   }
