@@ -6,6 +6,16 @@ var fixture = {
 , input: '3,10/5/13,02:00:00,10/5/13 02:00:00,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,BasalProfileStart,"PATTERN_NAME=standard, PROFILE_INDEX=1, RATE=0.65, START_TIME=7200000, ACTION_REQUESTOR=pump",11528764709,AABBCCDD,312,Paradigm Revel - 523'
 , proof: function proof (err, results) {
     var result = results.pop( );
+    var inst = result.instance;
+    var correct = {
+      basal: '0.65',
+      pattern: 'standard',
+      value: '0.65',
+      type: 'basal-rate-change',
+      start: '7200000',
+      deviceTime: '2013-10-05T02:00:00'
+    };
+
     result.errors.should.be.empty;
   }
 };

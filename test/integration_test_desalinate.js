@@ -14,7 +14,7 @@ describe("desalinate", function() {
   describe("stream", function ( ) {
     it('has results', function ( ) {
       function proof (err, results) {
-          results.length.should.equal(55);
+          results.length.should.equal(64);
           var report = validator(results);
           // report.errors.should.be.empty;
       }
