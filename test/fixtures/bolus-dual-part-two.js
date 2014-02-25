@@ -15,18 +15,15 @@ var fixture = {
       bolus: 1.7,
       programmed: 2.3,
       type: 'bolus',
-      joinKey: '52963854 2770 Paradigm 522',
+      joinKey: 'b69c1acba7',
       subType: 'dual/square',
       deviceTime: '2014-01-25T23:37:34',
       duration: '3600000'
     };
     inst.should.eql(correct);
-    // inst.value.should.equal('1.7');
-    // inst.programmed.should.equal(2.3);
-    // inst.duration.should.equal('3600000');
     inst.type.should.equal('bolus');
     inst.subType.should.equal('dual/square');
-    // console.log(result);
+    // XXX.bewest-2013-02: re-enable once data-model updated
     // result.errors.should.be.empty;
   }
 };
