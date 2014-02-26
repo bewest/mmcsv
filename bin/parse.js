@@ -19,7 +19,7 @@ function parse (opts) {
   es.pipeline(input, parser, es.writeArray(done));
 }
 function done (err, data) {
-  console.log(data);
+  console.log(JSON.stringify(data, 2));
 }
 
 module.exports = parse;

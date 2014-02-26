@@ -15,14 +15,14 @@ describe("parse", function() {
     var Parse = require('../lib/parse');
     var es = require('event-stream');
 
-    it('BGBayer should in the smbg stream', function(done) {
+    it('BGBayer should not be in the smbg stream', function(done) {
 
       var toProcess = es.readArray(['1,10/1/13,02:30:00,10/1/13 02:30:00,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
       
       var stream = Parse.smbg( );
 
       es.pipeline(toProcess, stream, es.writeArray(function finish (err, readings) {
-        readings.length.should.equal(1);
+        readings.length.should.equal(0);
         done( );
       }));
 
@@ -30,7 +30,7 @@ describe("parse", function() {
 
     it('should show year 2012, month Dec and day 20 for given raw time of 12/20/12 04:18:45', function(done) {
 
-      var toProcess = es.readArray(['1,12/20/12,04:18:45,12/20/12 04:18:45,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,BGBayer,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
+      var toProcess = es.readArray(['1,12/20/12,04:18:45,12/20/12 04:18:45,,96,,,,,,,,,,,,,,,,,,,,,,,,,,,,CalBGForPH,"AMOUNT=96, EDIT_STATE=not edited, REFERENCE_METHOD=plasma, DEVICE_SEQ_NUM=493",11524149201,52627643,490,Bayer CONTOUR NEXT LINK']);
       
       var stream = toProcess.pipe(Parse( ).all( ));
       es.pipeline(stream, es.writeArray(function finish (err, readings) {
@@ -40,13 +40,13 @@ describe("parse", function() {
       }));
 
     });
-    it('BGReceived should be recognised as a smbg', function(done) {
+    it('BGReceived should not be recognised as a smbg', function(done) {
 
       var toProcess = es.readArray(['70,10/4/13,18:43:58,10/4/13 18:43:58,,102,#C27532,,,,,,,,,,,,,,,,,,,,,,,,,,,BGReceived,"AMOUNT=102, ACTION_REQUESTOR=paradigm link or b key, PARADIGM_LINK_ID=C27532",11521576171,52626644,180,Paradigm Revel - 723']);
       
       var stream = toProcess.pipe(Parse( ).smbg( ));
       es.pipeline(stream,  es.writeArray(function finish (err, readings) {
-        readings.length.should.equal(1);
+        readings.length.should.equal(0);
         done( );
       }));
     });

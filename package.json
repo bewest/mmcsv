@@ -42,8 +42,9 @@
         "node"
       ],
       "pattern": [
-        "lib/parse",
+        "lib/desalinate",
         "lib/generate",
+        "lib/parse",
         "lib/util"
       ]
     },
@@ -59,6 +60,6 @@
     "travis-cov": "0.2.4",
     "coveralls": "2.6.1",
     "blanket": "1.1.6",
-    "tidepool-data-model": "0.0.4"
+    "tidepool-data-model": "0.0.7"
   }
 }

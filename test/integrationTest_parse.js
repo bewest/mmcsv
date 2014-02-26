@@ -12,7 +12,7 @@ describe("parse", function() {
     });
     
     describe("smbg integration tests", function() {
-      it('should emit 14 SMBG readings', function(done) {
+      it('should emit 7 SMBG readings', function(done) {
         var input = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
         var Parse = require('../lib/parse');
         var es = require('event-stream');
@@ -20,7 +20,7 @@ describe("parse", function() {
         var stream = es.pipeline(input, Parse.smbg( )
           , es.writeArray( function (err, readings) {
               should.not.exist(err);
-              readings.length.should.equal(14);
+              readings.length.should.equal(7);
               var values = _.map(readings, function (v) {
                 return parseInt(v.value);
               });
@@ -42,12 +42,12 @@ describe("parse", function() {
     describe("carb integration tests", function() {
       var es = require('event-stream');
       var Parse = require('../lib/parse');
-      it('should emit 14 carb records', function(done) {
+      it('should emit 16 carb records', function(done) {
 
         var toProcess = fs.createReadStream('test/1days_smbg_basal_bolus_carbs.csv');
         var stream = toProcess.pipe(Parse.carbs( ));
         es.pipeline(stream,  es.writeArray(function finish (err, readings) {
-          readings.length.should.equal(14);
+          readings.length.should.equal(16);
           done( );
         }));
       });
