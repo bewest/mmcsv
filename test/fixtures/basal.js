@@ -8,13 +8,14 @@ var fixture = {
     var result = results.pop( );
     var inst = result.instance;
     var correct = {
-      basal: '0.65',
-      pattern: 'standard',
-      value: '0.65',
+      scheduleName: 'standard',
+      value: 0.65,
       type: 'basal-rate-change',
-      start: '7200000',
+      deliveryType: 'scheduled',
       deviceTime: '2013-10-05T02:00:00'
     };
+
+    inst.should.eql(correct);
 
     result.errors.should.be.empty;
   }
