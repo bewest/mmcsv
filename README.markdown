@@ -10,11 +10,11 @@ $ git clone git://github.com/bewest/mmcsv.git mmcsv
 $ cd mmcsv
 $ npm install
 ```
-[![Build Status](https://travis-ci.org/tidepool-org/mmcsv-carelink-data.png?branch=master)](https://travis-ci.org/tidepool-org/mmcsv-carelink-data)
-[![Code Climate](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data.png)](https://codeclimate.com/github/tidepool-org/mmcsv-carelink-data)
-[![Coverage Status](https://coveralls.io/repos/tidepool-org/mmcsv-carelink-data/badge.png?branch=master)](https://coveralls.io/r/tidepool-org/mmcsv-carelink-data)
+[![Build Status](https://travis-ci.org/bewest/mmcsv.png?branch=master)](https://travis-ci.org/bewest/mmcsv)
+[![Code Climate](https://codeclimate.com/github/bewest/mmcsv.png)](https://codeclimate.com/github/bewest/mmcsv)
+[![Coverage Status](https://coveralls.io/repos/bewest/mmcsv/badge.png?branch=master)](https://coveralls.io/r/bewest/mmcsv)
 
-[![browser support](https://ci.testling.com/tidepool-org/mmcsv-carelink-data.png)](https://ci.testling.com/tidepool-org/mmcsv-carelink-data)
+[![browser support](https://ci.testling.com/bewest/mmcsv.png)](https://ci.testling.com/bewest/mmcsv)
 
 
 ### Test
