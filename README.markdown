@@ -6,7 +6,7 @@ Scraper and Parser for Medtronic pump, cgb and connected bg meter data.
 ## Install
 From source
 ```bash
-$ git clone git://github.com/tidepool-org/mmcsv-carelink-data.git mmcsv
+$ git clone git://github.com/bewest/mmcsv.git mmcsv
 $ cd mmcsv
 $ npm install
 ```

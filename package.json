@@ -6,7 +6,7 @@
   "scripts": {
     "test": "make test"
   },
-  "repository": "https://github.com/tidepool-org/mmcsv-carelink-data.git",
+  "repository": "https://github.com/bewest/mmcsv.git",
   "author": "Ben West <bewest@gmail.com>",
   "license": "BSD-3",
   "dependencies": {
