@@ -149,8 +149,13 @@ if (!module.parent) {
 }
 ```
 
-#### REST server
+## REST server
+
 Run a RESTful webserver that transforms POST body into json.
+
+Starting the server:
+`npm start` or `node server.js`, will bind to `PORT` environment variable.
+
 ### parser
 ```bash
 nf -j Procfile.dev -p start
