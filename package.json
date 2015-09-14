@@ -1,20 +1,25 @@
 {
-  "name": "tidepool-mmcsv-carelink-data",
+  "name": "mmcsv",
   "version": "0.0.3",
   "description": "Scrape Carelink and Convert stream of mm csv to text",
   "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
   "repository": "https://github.com/tidepool-org/mmcsv-carelink-data.git",
-  "author": "Tidepool contributors",
-  "license": "BSD-2",
+  "author": "Ben West <bewest@gmail.com>",
+  "license": "BSD-3",
   "dependencies": {
+    "bunyan": "^1.5.1",
+    "chrono-node": "~0.1.8",
     "common": "0.2.5",
     "event-stream": "3.1.0",
     "moment": "2.5.1",
     "optimist": "0.6.0",
     "request": "2.33.0",
+    "restify": "^4.0.2",
     "tabtab": "git://github.com/bewest/node-tabtab.git",
-    "util-extend": "~1.0.1",
-    "chrono-node": "~0.1.8"
+    "util-extend": "~1.0.1"
   },
   "bin": {
     "mmcsv": "bin/cmd.js"
