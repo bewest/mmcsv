@@ -12,7 +12,7 @@ $ npm install
 ```
 [![Build Status](https://travis-ci.org/bewest/mmcsv.png?branch=master)](https://travis-ci.org/bewest/mmcsv)
 [![Code Climate](https://codeclimate.com/github/bewest/mmcsv.png)](https://codeclimate.com/github/bewest/mmcsv)
-[![Coverage Status](https://coveralls.io/repos/bewest/mmcsv/badge.png?branch=master)](https://coveralls.io/r/bewest/mmcsv)
+[![Coverage Status](https://coveralls.io/repos/bewest/mmcsv/badge.svg?branch=master&service=github)](https://coveralls.io/github/bewest/mmcsv?branch=master)
 
 [![browser support](https://ci.testling.com/bewest/mmcsv.png)](https://ci.testling.com/bewest/mmcsv)
 
