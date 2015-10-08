@@ -32,6 +32,9 @@ function parse (args) {
 
   opts.command = opts._.shift( );
   if (command == 'fetch') {
+    // config.boolean('connect');
+    var keys = [null].concat(Object.keys(opts));
+    opts.connect = keys.indexOf('connect') > 0;
     opts.username = opts.username || process.env['CARELINK_USERNAME'];
     opts.password = opts.password || process.env['CARELINK_PASSWORD'];
   }
