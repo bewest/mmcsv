@@ -1,6 +1,6 @@
 {
   "name": "mmcsv",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "description": "Scrape Carelink and Convert stream of mm csv to text",
   "main": "index.js",
   "scripts": {
@@ -55,6 +55,7 @@
     },
     "carelink_security": "https://carelink.minimed.com/patient/j_security_check",
     "carelink_login": "https://carelink.minimed.com/patient/main/login.do",
+    "connect_json": "https://carelink.minimed.com/patient/connect/ConnectViewerServlet",
     "carelink_csv": "https://carelink.minimed.com/patient/main/selectCSV.do"
   },
   "devDependencies": {
