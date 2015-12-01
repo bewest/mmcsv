@@ -1,5 +1,7 @@
 mmcsv
 ===========
+This is the ORIGINAL README file for Ben West's mmcsv repo. It should all still work if needed, hence I've left this in
+Instructions on mmcsv640g will go up soon :-)
 
 Scraper and Parser for Medtronic pump, cgb and connected bg meter data.
 
