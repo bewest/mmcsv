@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.7 1st December 2015'
+VERSION='V0.71 2nd December 2015'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # Currently using crude logic here to keep things moving, with limited error trapping...
@@ -227,13 +227,13 @@ then
 fi
 echo
 
-echo Medtronic Predictions - As Notes
-"$Mmcsv640gPath"/bin/cmd.js parse --filter=medpredict $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_medpredict.json
-filesize=$(wc -c <"$CSVDataPath"$"/latest640g_medpredict.json")
-if [ $filesize -gt $EMPTYSIZE ]
-then
-	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_medpredict.json "$your_nightscout"$"/api/v1/treatments"
-fi
+echo SKIPPING Medtronic Predictions - As Notes
+#"$Mmcsv640gPath"/bin/cmd.js parse --filter=medpredict $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_medpredict.json
+#filesize=$(wc -c <"$CSVDataPath"$"/latest640g_medpredict.json")
+#if [ $filesize -gt $EMPTYSIZE ]
+#then
+#	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_medpredict.json "$your_nightscout"$"/api/v1/treatments"
+#fi
 echo
 
 echo Pump Alarms - As Announcements
