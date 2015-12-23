@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.71 2nd December 2015'
+VERSION='V0.72 20th December 2015'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # Currently using crude logic here to keep things moving, with limited error trapping...
@@ -78,8 +78,8 @@ echo "Uploading..."
 
 echo 
 sleep 2m	# at least a two minute wait for upload and transfer to CSV report page... 
-echo "Waiting for CSV file download from Carelink"
-	while [ ! -f "$DownloadPath"/*.csv ] ; 
+echo "Waiting for valid CSV file download from Carelink"
+	while [ ! -s "$DownloadPath"/*.csv ] ; # changed to -s to check for empty csv files also
 	do 
 		sleep 30s	# check every 30 seconds 
 	done
@@ -100,7 +100,7 @@ sed -i '1,11d' $CSVDataPath/latest640g.csv
 
 echo
 echo Number of Entries in latest CSV file
-if [ -f $CSVDataPath/latest640g.csv ]
+if [ -s $CSVDataPath/latest640g.csv ]
 then
 	LAST_LINES=$(awk '{n+=1} END {print n}' $CSVDataPath/latest640g.csv)
 else
@@ -110,7 +110,7 @@ echo $LAST_LINES
 
 echo
 echo Number of Entries in latest but one CSV file
-if [ -f $CSVDataPath/latest640gbutone.csv ]
+if [ -s $CSVDataPath/latest640gbutone.csv ]
 then
 	LAST_LINESBUTONE=$(awk '{n+=1} END {print n}' $CSVDataPath/latest640gbutone.csv)
 else
