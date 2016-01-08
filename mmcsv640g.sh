@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.72 20th December 2015'
+VERSION='V0.73 7th January 2016'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # Currently using crude logic here to keep things moving, with limited error trapping...
@@ -74,6 +74,11 @@ sleep 1m
 # Going to run MiniMouseMacro to perform mouse click on upload page
 # MiniMouseMacro and a valid mmcsv640g.mmmacro file must be present in MousePath
 echo "Uploading..."
+"$MousePath"$"/MiniMouseMacro" //e //m "$MousePath"$"/mmcsv640g.mmmacro"
+
+# mm640g sometimes panics on first connection attempt - try clicking again soon after first try...
+# (this will either do nothing - we're uploading - or click the Retry button)
+sleep 45s
 "$MousePath"$"/MiniMouseMacro" //e //m "$MousePath"$"/mmcsv640g.mmmacro"
 
 echo 
