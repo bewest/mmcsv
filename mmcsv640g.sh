@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.73 7th January 2016'
+VERSION='V0.74 21st February 2016'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # Currently using crude logic here to keep things moving, with limited error trapping...
@@ -140,8 +140,11 @@ fi
 if [ $LAST_LINESBUTONE -ne $LAST_LINES ]
 then
 echo Extract Newly Generated Entries Only
-sed -n $LAST_LINESBUTONE,'$p' $CSVDataPath/latest640g.csv > $CSVDataPath/use640g.csv
+sed -n $LAST_LINESBUTONE,'$p' $CSVDataPath/latest640g.csv > $CSVDataPath/use640g_orig.csv
 echo
+
+# Check for decimal comma within quotes and convert to decimal point (e.g. some euro regions)
+sed 's/"\([0-9]*\),\([0-9]*\)"/\1.\2/g' $CSVDataPath/use640g_orig.csv > $CSVDataPath/use640g.csv
 
 # ****************************************************************************************
 # Don't parse 'all' to entries as generates a ton of wasted entries in DB
