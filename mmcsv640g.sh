@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.74 21st February 2016'
+VERSION='V0.75 4th March 2016'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # Currently using crude logic here to keep things moving, with limited error trapping...
@@ -172,6 +172,15 @@ fi
 echo
 echo "Treatments - Basal Changes (percent and absolute), PLGM, Cannula Change, Sensor Start, Bolus and Wizard"
 
+# echo Basal - Absolute
+#"$Mmcsv640gPath"/bin/cmd.js parse --filter=basal $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_basal.json
+#filesize=$(wc -c <"$CSVDataPath"$"/latest640g_basal.json")
+#if [ $filesize -gt $EMPTYSIZE ]
+#then
+#	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_basal.json "$your_nightscout"$"/api/v1/treatments"
+#fi
+#echo
+
 echo PLGM - SmartGuard
 "$Mmcsv640gPath"/bin/cmd.js parse --filter=plgm $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_plgm.json
 filesize=$(wc -c <"$CSVDataPath"$"/latest640g_plgm.json")
@@ -252,6 +261,7 @@ then
 	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_pump_alarms.json "$your_nightscout"$"/api/v1/treatments"
 fi
 echo
+
 fi # found a file to process
 echo
 let COUNT=COUNT+1
