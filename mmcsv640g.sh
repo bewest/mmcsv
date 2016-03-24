@@ -9,9 +9,10 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.75 4th March 2016'
+VERSION='V0.82 23rd March 2016'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
+# CareLink Uploader (ie not using Firefox) is provided by Tom Collins - thanks Tom!
 # Currently using crude logic here to keep things moving, with limited error trapping...
 # Split up jsons for debug - no need, just split entries, treatments to be more efficient...
 # Please use with caution. There'll be bugs here...
@@ -20,17 +21,14 @@ VERSION='V0.75 4th March 2016'
 
 # ****************************************************************************************
 # Known Issues TO (TRY TO) FIX - 
-# ****************************************************************************************
-# Doesn't change over to latest date on CSV upload - log out and back in again in Selenium script but need to avoid Medtronic browser alert page if you do...
+# **************************************************************************************** 
 # Dropping the odd data point between uploads - overhaul data selection to use timestamp and not line number... 
 # Medtronic Predicted SG values bunch up horribly on >3hr or narrow browser display, not being rescaled. Change sample rate? eg display every other?
-# Double vision-currently clears out CSV files to prevent IO error on pause to look for CSV files - an easy fix when I'm more awake... 
 # ****************************************************************************************
 
 
 # ****************************************************************************************
-# Assumes run along with Selenium script
-# Usually looking to upload data at around 1, 6, 11, 16, ..., 56 minutes past
+# Assumes running CareLink Uploader or running along with Selenium script (usually looking to upload data at 1, 6, 11, 16, ..., 56 minutes past)
 # Import variables from config.sh script
 # You must include the directory of your config script when calling 
 echo Importing Varables...
@@ -41,16 +39,20 @@ source "$1"/config.sh
 echo $VERSION
 
 echo Clearing Up CSV Download Directory in ten seconds...
+echo $DownloadPath
 sleep 10s
 rm -f "$DownloadPath"/*.csv
 
 # Get to the right place locally...
 export PATH=$PATH:$NodejsPath
+echo Using Data Directory
 cd "$CSVDataPath"
 pwd
-sleep 50
+# sleep 50
 # Capture empty JSON files later ie "[]"
 EMPTYSIZE=3 #bytes
+
+START_TIME=0	#last time we ran the uploader (if at all)
 
 # Allow to run for ~240 hours (roughly), ~5 min intervals
 # This thing is bound to need some TLC and don't want it running indefinitely...
@@ -61,12 +63,17 @@ echo
 echo Clearing Up CSV Download Directory...
 rm -f "$DownloadPath"/*.csv
 
+# Splits here - Firefox or CareLink Uploader module)
+if [ $uploader -eq 0 ] 
+then
+echo "Using Firefox and Selenium..."
 echo "Waiting for CareLink upload page..."
 # Extract minutes past each hours and start at preset time (10# forces base ten to avoid errors with leading 0 in returned value, eg at 08 mins)
-	while [ $((10#$(date +'%M') % $gap_mins)) -ne 0 ] ; 
+while [ $((10#$(date +'%M') % $gap_mins)) -ne 0 ] ; 
 	do
 		sleep 30s # check every 30 seconds
-	done	
+	done
+	
 # Wait 1 minute post Selenium call up of upload page
 echo "Waiting for Mouse Click on upload page..."
 sleep 1m
@@ -83,14 +90,32 @@ sleep 45s
 
 echo 
 sleep 2m	# at least a two minute wait for upload and transfer to CSV report page... 
+
 echo "Waiting for valid CSV file download from Carelink"
 	while [ ! -s "$DownloadPath"/*.csv ] ; # changed to -s to check for empty csv files also
 	do 
 		sleep 30s	# check every 30 seconds 
 	done
 
+else
+	echo "Using CareLink Uploader..."
+	while [ $((10#$(date +'%s')/60-$START_TIME)) -lt $gap_mins_delay ] ; 
+	do 
+		sleep 30s	# check every 30 seconds 
+	done
+	while [ ! -s "$DownloadPath"/*.csv ] ; # changed to -s to check for empty csv files also
+	do
+		if [ $((10#$(date +'%s')/60-$START_TIME)) -ge $gap_mins ] 
+		then
+			START_TIME=$((10#$(date +'%s')/60))
+			"$Mmcsv640gPath"/uploader/CareLinkUploader &
+		fi
+	sleep 30s  # check every 30 seconds
+	done
+fi 	
+	
 # We've found a CSV file... hooray
-uploaded_recent_file=$(ls -t "$DownloadPath"/*.csv | head -n1)
+uploaded_recent_file=$(ls -t "$DownloadPath"/*.csv | head -1)
 echo "$uploaded_recent_file"
 echo
 #move the file to the Data Directory and rename
@@ -172,14 +197,14 @@ fi
 echo
 echo "Treatments - Basal Changes (percent and absolute), PLGM, Cannula Change, Sensor Start, Bolus and Wizard"
 
-# echo Basal - Absolute
-#"$Mmcsv640gPath"/bin/cmd.js parse --filter=basal $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_basal.json
-#filesize=$(wc -c <"$CSVDataPath"$"/latest640g_basal.json")
-#if [ $filesize -gt $EMPTYSIZE ]
-#then
-#	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_basal.json "$your_nightscout"$"/api/v1/treatments"
-#fi
-#echo
+echo Basal - Absolute
+"$Mmcsv640gPath"/bin/cmd.js parse --filter=basal $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_basal.json
+filesize=$(wc -c <"$CSVDataPath"$"/latest640g_basal.json")
+if [ $filesize -gt $EMPTYSIZE ]
+then
+	curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @latest640g_basal.json "$your_nightscout"$"/api/v1/treatments"
+fi
+echo
 
 echo PLGM - SmartGuard
 "$Mmcsv640gPath"/bin/cmd.js parse --filter=plgm $CSVDataPath/use640g.csv > $CSVDataPath/latest640g_plgm.json
