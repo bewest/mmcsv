@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.82 23rd March 2016'
+VERSION='V0.83 27th March 2016'
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # CareLink Uploader (ie not using Firefox) is provided by Tom Collins - thanks Tom!
@@ -52,7 +52,19 @@ pwd
 # Capture empty JSON files later ie "[]"
 EMPTYSIZE=3 #bytes
 
+# Uploader setup
 START_TIME=0	#last time we ran the uploader (if at all)
+
+# Update date format if required
+echo Checking Regional CareLink Settings
+if [ -z "$carelink_timestamp" ] 
+	then 
+		echo Timestamp not found in config.sh - setting to default
+		carelink_timestamp='DD/MM/YYTHH:mm:ss' # UK Regional Settings
+	fi
+CARELINK_LINE="var CARELINK_TIME = '"$"$carelink_timestamp"$"' ;"
+echo $carelink_timestamp
+sed -i "s+^var CARELINK_TIME.*+$CARELINK_LINE+g" "$Mmcsv640gPath"/lib/utils.js
 
 # Allow to run for ~240 hours (roughly), ~5 min intervals
 # This thing is bound to need some TLC and don't want it running indefinitely...
@@ -108,10 +120,11 @@ else
 		if [ $((10#$(date +'%s')/60-$START_TIME)) -ge $gap_mins ] 
 		then
 			START_TIME=$((10#$(date +'%s')/60))
-			"$Mmcsv640gPath"/uploader/CareLinkUploader &
+			"$Mmcsv640gPath"$"/uploader/CareLinkUploader" "$1"$"/config.sh" &
 		fi
 	sleep 30s  # check every 30 seconds
 	done
+	sleep 10s # in case we've just stumbled across the file before it's finished downloading... inotifywait would be better solution for another day...
 fi 	
 	
 # We've found a CSV file... hooray
@@ -168,8 +181,12 @@ echo Extract Newly Generated Entries Only
 sed -n $LAST_LINESBUTONE,'$p' $CSVDataPath/latest640g.csv > $CSVDataPath/use640g_orig.csv
 echo
 
+# Regional tweaks
 # Check for decimal comma within quotes and convert to decimal point (e.g. some euro regions)
-sed 's/"\([0-9]*\),\([0-9]*\)"/\1.\2/g' $CSVDataPath/use640g_orig.csv > $CSVDataPath/use640g.csv
+sed 's/"\([0-9]*\),\([0-9]*\)"/\1.\2/g' $CSVDataPath/use640g_orig.csv > $CSVDataPath/use640g_temp.csv
+
+# Replace semicolon delimiter with a comma
+sed 's/;/,/g' $CSVDataPath/use640g_temp.csv > $CSVDataPath/use640g.csv
 
 # ****************************************************************************************
 # Don't parse 'all' to entries as generates a ton of wasted entries in DB

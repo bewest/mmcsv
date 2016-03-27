@@ -19,6 +19,11 @@ api_secret_hash='2ce212ef676099da17ec5aff64db0c83bf3f7b4f' # This is the SHA-1 H
 your_nightscout='https://yourwebsite.azurewebsites.net' #'https://something.azurewebsites.net'
 gap_mins=5 # max time to wait for CSV download. Suggest 5 or 10 minutes and always start higher
 gap_mins_delay=0 # use strict time for each upload cycle (if >0) or don't wait to minimise latency (0)
+carelink_timestamp='DD/MM/YYTHH:mm:ss' # Please select one of these by removing the # from the beginning of just ONE option
+#carelink_timestamp='MM/YY/YYTHH:mm:ss' # Please select one of these by removing the # from the beginning of just ONE option
+#carelink_timestamp='YYYY-MM-DDTHH:mm:ss' # Please select one of these by removing the # from the beginning of just ONE option
+#carelink_timestamp='DD-MM-YYYYTHH:mm:ss' # Please select one of these by removing the # from the beginning of just ONE option
+
 # ****************************************************************************************
 # USER SPECIFIC Uploader Info - Please enter your values here
 # ****************************************************************************************
