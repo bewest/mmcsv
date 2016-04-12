@@ -9,7 +9,8 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.83 27th March 2016'
+VERSION='V0.85 1st April 2016'
+echo $VERSION
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
 # CareLink Uploader (ie not using Firefox) is provided by Tom Collins - thanks Tom!
@@ -36,7 +37,6 @@ source "$1"/config.sh
 # ****************************************************************************************
 # Let's go...
 # ****************************************************************************************
-echo $VERSION
 
 echo Clearing Up CSV Download Directory in ten seconds...
 echo $DownloadPath
@@ -48,23 +48,14 @@ export PATH=$PATH:$NodejsPath
 echo Using Data Directory
 cd "$CSVDataPath"
 pwd
-# sleep 50
+echo Clearing Up CSV Files...
+rm -f "$CSVDataPath"/*.csv
+
 # Capture empty JSON files later ie "[]"
 EMPTYSIZE=3 #bytes
 
 # Uploader setup
 START_TIME=0	#last time we ran the uploader (if at all)
-
-# Update date format if required
-echo Checking Regional CareLink Settings
-if [ -z "$carelink_timestamp" ] 
-	then 
-		echo Timestamp not found in config.sh - setting to default
-		carelink_timestamp='DD/MM/YYTHH:mm:ss' # UK Regional Settings
-	fi
-CARELINK_LINE="var CARELINK_TIME = '"$"$carelink_timestamp"$"' ;"
-echo $carelink_timestamp
-sed -i "s+^var CARELINK_TIME.*+$CARELINK_LINE+g" "$Mmcsv640gPath"/lib/utils.js
 
 # Allow to run for ~240 hours (roughly), ~5 min intervals
 # This thing is bound to need some TLC and don't want it running indefinitely...
@@ -126,6 +117,20 @@ else
 	done
 	sleep 10s # in case we've just stumbled across the file before it's finished downloading... inotifywait would be better solution for another day...
 fi 	
+
+if [ $COUNT -eq 0 ]
+then
+	# Update date format if required - first cycle only
+	echo First Run - Checking Regional CareLink Settings
+	if [ -z "$carelink_timestamp" ] 
+		then 
+			echo Timestamp not found in config.sh - setting to default
+			carelink_timestamp='DD/MM/YYTHH:mm:ss' # UK Regional Settings
+		fi
+	CARELINK_LINE="var CARELINK_TIME = '"$"$carelink_timestamp"$"' ;"
+	echo $carelink_timestamp
+	sed -i "s+^var CARELINK_TIME.*+$CARELINK_LINE+g" "$Mmcsv640gPath"/lib/utils.js	
+fi
 	
 # We've found a CSV file... hooray
 uploaded_recent_file=$(ls -t "$DownloadPath"/*.csv | head -1)
@@ -181,12 +186,21 @@ echo Extract Newly Generated Entries Only
 sed -n $LAST_LINESBUTONE,'$p' $CSVDataPath/latest640g.csv > $CSVDataPath/use640g_orig.csv
 echo
 
-# Regional tweaks
+# Regional tweaks - multiple files generated for debug
 # Check for decimal comma within quotes and convert to decimal point (e.g. some euro regions)
 sed 's/"\([0-9]*\),\([0-9]*\)"/\1.\2/g' $CSVDataPath/use640g_orig.csv > $CSVDataPath/use640g_temp.csv
 
+# Check for decimal comma within ; and convert to decimal point (e.g. some euro regions)
+sed 's/;\([0-9]*\),\([0-9]*\)/\1.\2,/g' $CSVDataPath/use640g_temp.csv > $CSVDataPath/use640g_temp1.csv
+
+# Check for decimal comma with preceeding = and convert to decimal point (e.g. some euro regions)
+sed 's/=\([0-9]*\),\([0-9]\)/=\1.\2/g' $CSVDataPath/use640g_temp1.csv > $CSVDataPath/use640g_temp2.csv
+
+# Check for decimal comma with preceeding = and - and convert to decimal point (e.g. some euro regions)
+sed 's/=-\([0-9]*\),\([0-9]\)/=-\1.\2/g' $CSVDataPath/use640g_temp2.csv > $CSVDataPath/use640g_temp3.csv
+
 # Replace semicolon delimiter with a comma
-sed 's/;/,/g' $CSVDataPath/use640g_temp.csv > $CSVDataPath/use640g.csv
+sed 's/;/,/g' $CSVDataPath/use640g_temp3.csv > $CSVDataPath/use640g.csv
 
 # ****************************************************************************************
 # Don't parse 'all' to entries as generates a ton of wasted entries in DB
