@@ -20,13 +20,15 @@ echo $VERSION
 # You run this at your own risk.
 # Thank you.
 
-# ****************************************************************************************
-# Known Issues TO (TRY TO) FIX - 
-# **************************************************************************************** 
-# Dropping the odd data point between uploads - overhaul data selection to use timestamp and not line number... 
-# Medtronic Predicted SG values bunch up horribly on >3hr or narrow browser display, not being rescaled. Change sample rate? eg display every other?
-# ****************************************************************************************
-
+echo '*****************************'
+echo ' Known Issues TO (TRY TO) FIX'
+echo '*****************************'
+echo ' - Dropping the odd data point between uploads - overhaul data selection to use timestamp and not line number...'
+echo ' - Square / Dual Bolus Insulin is marked at the end of the bolus period ie IOB will be under-estimated during a dual / square bolus and over-estimated at the end of the the bolus onward. This needs to be properly implemented'
+echo ' - Every time you upload to CareLink your CareLink DB and CSV file becomes bloated by ~180 lines of summary information: that quickly mounts up. The long term impact of that on your CareLink dataset is unknown'
+echo '*****************************'
+# If you get stuck / accidentally upload a huge CSV file, delete Treatments (and possibly Entries) documents in your MongoDB to revive Nightscout...
+# Removed Medtronic Predicted SG from default upload - stability issues that need more time to look at.
 
 # ****************************************************************************************
 # Assumes running CareLink Uploader or running along with Selenium script (usually looking to upload data at 1, 6, 11, 16, ..., 56 minutes past)
