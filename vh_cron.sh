@@ -6,7 +6,7 @@
 # - if the battery is too low or too hot
 # Work in progress to control CHIP / Pi with VirtualHere
 # @LittleDMatt
-# V0.2 14th April 2016
+# V0.21 15th April 2016
 
 ################################
 # Run as root / as cron job - */5 * * * * /bin/bash -lc /root/vh_cron.sh will run every five minutes
@@ -34,13 +34,25 @@ echo '/usr/sbin/vhusbdarm -b' > /root/vh_action.log
 fi
 
 ################################
-# Check if we've lost the Bayer Stick...
+# Check if we've lost the Bayer Stick from the OS...
+lsusb > /root/vh_lsusb.log
+grep 'Bayer' /root/vh_lsusb.log > /root/vh_usb.log
+# Bayer will be listed -  "Bayer Health Care LLC"
+# Action (if required): reboot (ffs, got to be a better way :o )
+if [ ! -s /root/vh_usb.log  ] 
+then 
+echo 'reboot - USB Loss' > /root/vh_action.log
+/sbin/reboot
+fi
+
+################################
+# Check if we've lost the Bayer Stick from VirtualHere...
 grep 'Unmanaging device' /root/vh.log | tail -1 > /root/vh_disconnect.log
 # last line of vh.log will have Unmanaging device if we're stuck
 # Action (if required): reboot (ffs, got to be a better way :o )
 if [ -s /root/vh_disconnect.log  ] 
 then 
-echo 'reboot' > /root/vh_action.log
+echo 'reboot - VH Loss' > /root/vh_action.log
 /sbin/reboot
 fi
 
@@ -160,8 +172,8 @@ echo 'Low Battery' > /root/vh_action.log
 /sbin/shutdown
 fi
 
-# Heat Action
-if [ ${TEMP_C%.*} -gt 65 ] 
+# Heat Action - this is temp of AXP209 power management chip, not the battery, which rests ~5mm above it. R8 chip is on reverse of PCB.
+if [ ${TEMP_C%.*} -gt 75 ] 
 then 
 echo 'Overheat' > /root/vh_action.log
 /sbin/shutdown

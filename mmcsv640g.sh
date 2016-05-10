@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.85 1st April 2016'
+VERSION='V0.86 5th May 2016'
 echo $VERSION
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
@@ -115,6 +115,13 @@ else
 			START_TIME=$((10#$(date +'%s')/60))
 			"$Mmcsv640gPath"$"/uploader/CareLinkUploader" "$1"$"/config.sh" &
 		fi
+	if [ -s "$DownloadPath"/Announcement.json ]
+	then
+		echo "Checking Bayer Condition..."
+		mv "$DownloadPath"/Announcement.json Announcement.json
+		curl -vs -X POST --header "Content-Type: application/json" --header "Accept: application/json" --header "api-secret:"$api_secret_hash --data-binary @Announcement.json "$your_nightscout"$"/api/v1/treatments"
+		echo
+	fi
 	sleep 30s  # check every 30 seconds
 	done
 	sleep 10s # in case we've just stumbled across the file before it's finished downloading... inotifywait would be better solution for another day...
