@@ -35,6 +35,8 @@ function parse (args) {
     opts.username = opts.username || opts.u || process.env['CARELINK_USERNAME'];
     opts.password = opts.password || opts.p || process.env['CARELINK_PASSWORD'];
     opts.days = opts.days || opts.d;
+  } else if (command == 'parse') {
+    opts.filter = opts.filter || opts.f;
   }
 
   return opts;
