@@ -32,8 +32,11 @@ function parse (args) {
 
   opts.command = opts._.shift( );
   if (command == 'fetch') {
-    opts.username = opts.username || process.env['CARELINK_USERNAME'];
-    opts.password = opts.password || process.env['CARELINK_PASSWORD'];
+    opts.username = opts.username || opts.u || process.env['CARELINK_USERNAME'];
+    opts.password = opts.password || opts.p || process.env['CARELINK_PASSWORD'];
+    opts.days = opts.days || opts.d;
+  } else if (command == 'parse') {
+    opts.filter = opts.filter || opts.f;
   }
 
   return opts;

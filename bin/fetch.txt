@@ -6,4 +6,3 @@ Options:
   --username=, -u    Carelink username
   --password=, -p    Carelink password
   --days, -d         Number of days to fetch
-  --json, -j         Output json, not csv
