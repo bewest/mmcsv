@@ -9,7 +9,7 @@ echo '*Only Use If You Accept This*'
 echo '* Started 12th November 2015*'
 echo '*** Thanks - @LittleDMatt ***'
 echo '*****************************'
-VERSION='V0.86 5th May 2016'
+VERSION='V0.87 11th October 2016'
 echo $VERSION
 #
 # Indebted to Ben West for mmcsv - these js are tweaks and additions to his original parsing options
@@ -40,10 +40,9 @@ source "$1"/config.sh
 # Let's go...
 # ****************************************************************************************
 
-echo Clearing Up CSV Download Directory in ten seconds...
+echo Looking for CSV File in Download Directory... 
 echo $DownloadPath
-sleep 10s
-rm -f "$DownloadPath"/*.csv
+echo e.g. for manual upload
 
 # Get to the right place locally...
 export PATH=$PATH:$NodejsPath
@@ -65,13 +64,13 @@ COUNT=0
 MAXCNT=2880
 until [ $COUNT -gt $MAXCNT ]; do
 echo
-echo Clearing Up CSV Download Directory...
-rm -f "$DownloadPath"/*.csv
 
 # Splits here - Firefox or CareLink Uploader module)
 if [ $uploader -eq 0 ] 
 then
 echo "Using Firefox and Selenium..."
+echo "Clearing Up CSV Download Directory..."
+rm -f "$DownloadPath"/*.csv
 echo "Waiting for CareLink upload page..."
 # Extract minutes past each hours and start at preset time (10# forces base ten to avoid errors with leading 0 in returned value, eg at 08 mins)
 while [ $((10#$(date +'%M') % $gap_mins)) -ne 0 ] ; 
